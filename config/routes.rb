@@ -11,5 +11,5 @@ Rails.application.routes.draw do
   
   get("/directors/coppola", { :controller => "directors", :action => "francis" })
   
-  get("/actors/freeman", { :controller => "directors", :action => "morgan" })
+  get("/actors/freeman", { :controller => "actors", :action => "morgan" })
 end
