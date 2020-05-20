@@ -8,7 +8,7 @@ class MoviesController < ApplicationController
   end
   
   def before2k
-    @older_movies = Movie.where("year < ?", 2000)
+    @older_movies = Movie.where("year < ?", 2000).order(:year)
 
     render({ :template => "movie_templates/pre2000.html.erb" })
   end
