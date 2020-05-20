@@ -1,6 +1,10 @@
 class DirectorsController < ApplicationController
   def last
-    @youngest = Director.all.order({ :dob => :desc }).at(0)
+    @youngest = Director.
+      all.
+      where.not({ :dob => nil }).
+      order({ :dob => :desc }).
+      at(0)
 
     render({ :template => "director_templates/youngest" })
   end
@@ -8,7 +12,10 @@ class DirectorsController < ApplicationController
   def under_55
     fifty_five_years_ago = Time.now - 55.years
 
-    @young_directors = Director.where("dob > ?", fifty_five_years_ago).order({ :dob => :desc })
+    @young_directors = Director.
+    all.
+    where("dob > ?", fifty_five_years_ago).
+    order({ :dob => :desc })
 
     render({ :template => "director_templates/young" })
   end
