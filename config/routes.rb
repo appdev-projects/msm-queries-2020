@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
+  get("/", { :controller => "application", :action => "homepage" })
 
-  get("/movies/darknight", { :controller => "movies", :action => "tdk" })
+  get("/movies/darkknight", { :controller => "movies", :action => "tdk" })
 
   get("/movies/before2000", { :controller => "movies", :action => "before2k" })
 
