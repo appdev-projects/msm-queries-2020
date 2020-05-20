@@ -1,10 +1,10 @@
 class MoviesController < ApplicationController
-  def tdk
-    @movie = Movie.where({ :title => "The Dark Knight"}).at(0)
+  def casablanca
+    @movie = Movie.where({ :title => "Casablanca"}).at(0)
 
-    @num_days = (Time.now.year - @movie.year) * 365
+    @num_years = (Time.now.year - @movie.year)
 
-    render({ :template => "movie_templates/dk.html.erb" })
+    render({ :template => "movie_templates/cb.html.erb" })
   end
   
   def before2k
