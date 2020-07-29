@@ -27,7 +27,7 @@ Rails.application.routes.draw do
 
   get("/delete_actor/:path_id", { :controller => "actors", :action => "destroy" })
 
-  get("/record_actor", { :controller => "actors", :action => "create" })
+  get("/insert_actor", { :controller => "actors", :action => "create" })
 
   get("/modify_movie/:path_id", { :controller => "movies", :action => "update" })
 

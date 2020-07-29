@@ -48,10 +48,10 @@
 
 <hr>
 
-<table>
+<table border="1">
   <tr>
     <th>
-      ID
+      Image
     </th>
 
     <th>
@@ -63,19 +63,7 @@
     </th>
 
     <th>
-      Bio
-    </th>
-
-    <th>
-      Image
-    </th>
-
-    <th>
-      Created at
-    </th>
-
-    <th>
-      Updated at
+      ID
     </th>
 
     <th>
@@ -85,7 +73,7 @@
   <% @directors.each do |director| %>
   <tr>
     <td>
-      <%= director.id %>
+      <img src="https://robohash.org/<%= director.name %>">
     </td>
 
     <td>
@@ -97,18 +85,7 @@
     </td>
 
     <td>
-      <%= director.bio %>
-    </td>
-
-    <td>
-      <%= director.image %>
-    </td>
-
-    <td>
-      <%= time_ago_in_words(director.created_at) %> ago
-    </td>
-    <td>
-      <%= time_ago_in_words(director.updated_at) %> ago
+      <%= director.id %>
     </td>
 
     <td>

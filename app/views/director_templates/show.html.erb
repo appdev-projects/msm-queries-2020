@@ -60,44 +60,92 @@
 
 <hr>
 
-<h2>
-  <em>Optional stretch goal:</em> Edit director
-</h2>
+<h2>Filmography</h2>
 
-<form action="/modify_director/<%= @director.id %>">
-  <div class="form-group">
-    <label for="name_box">
-      Name
-    </label>
+<table border="1">
+  <tr>
+    <th>
+      ID
+    </th>
 
-    <input type="text" id="name_box" name="query_name" value="<%= @director.name %>">
-  </div>
+    <th>
+      Title
+    </th>
 
-  <div class="form-group">
-    <label for="dob_box">
-      Dob
-    </label>
+    <th>
+      Year
+    </th>
 
-    <input type="date" id="dob_box" name="query_dob" value="<%= @director.dob %>">
-  </div>
+    <th>
+      Duration
+    </th>
 
-  <div class="form-group">
-    <label for="bio_box">
-      Bio
-    </label>
+    <th>
+      Description
+    </th>
 
-    <textarea id="bio_box" name="query_bio" rows="3"><%= @director.bio %></textarea>
-  </div>
-
-  <div class="form-group">
-    <label for="image_box">
+    <th>
       Image
-    </label>
+    </th>
 
-    <input type="text" id="image_box" name="query_image" value="<%= @director.image %>">
-  </div>
+    <th>
+      Director
+    </th>
 
-  <button>
-    Update director
-  </button>
-</form>
+    <th>
+      Created at
+    </th>
+
+    <th>
+      Updated at
+    </th>
+
+    <th>
+    </th>
+  </tr>
+
+  <% @movies.each do |movie| %>
+  <tr>
+    <td>
+      <%= movie.id %>
+    </td>
+
+    <td>
+      <%= movie.title %>
+    </td>
+
+    <td>
+      <%= movie.year %>
+    </td>
+
+    <td>
+      <%= movie.duration %>
+    </td>
+
+    <td>
+      <%= movie.description %>
+    </td>
+
+    <td>
+      <img src="<%= movie.image %>">
+    </td>
+
+    <td>
+      <%= movie.director_id %>
+    </td>
+
+    <td>
+      <%= time_ago_in_words(movie.created_at) %> ago
+    </td>
+    <td>
+      <%= time_ago_in_words(movie.updated_at) %> ago
+    </td>
+
+    <td>
+      <a href="/movies/<%= movie.id %>">
+        Show details
+      </a>
+    </td>
+  </tr>
+  <% end %>
+</table>

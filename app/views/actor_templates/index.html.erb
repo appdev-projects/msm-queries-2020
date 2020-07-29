@@ -48,10 +48,10 @@
 
 <hr>
 
-<table>
+<table border="1">
   <tr>
     <th>
-      ID
+      Image
     </th>
 
     <th>
@@ -63,19 +63,7 @@
     </th>
 
     <th>
-      Bio
-    </th>
-
-    <th>
-      Image
-    </th>
-
-    <th>
-      Created at
-    </th>
-
-    <th>
-      Updated at
+      ID
     </th>
 
     <th>
@@ -85,7 +73,7 @@
   <% @actors.each do |actor| %>
   <tr>
     <td>
-      <%= actor.id %>
+      <img src="https://robohash.org/<%= actor.name %>">
     </td>
 
     <td>
@@ -97,18 +85,7 @@
     </td>
 
     <td>
-      <%= actor.bio %>
-    </td>
-
-    <td>
-      <%= actor.image %>
-    </td>
-
-    <td>
-      <%= time_ago_in_words(actor.created_at) %> ago
-    </td>
-    <td>
-      <%= time_ago_in_words(actor.updated_at) %> ago
+      <%= actor.id %>
     </td>
 
     <td>
