@@ -1,15 +1,23 @@
 Rails.application.routes.draw do
   get("/", { :controller => "application", :action => "homepage" })
 
-  get("/movies/casablanca", { :controller => "movies", :action => "casablanca" })
+  get("/movies/:some_id", { :controller => "movies", :action => "details" })
   
-  get("/movies/before2000", { :controller => "movies", :action => "before2k" })
+  get("/movies/before/:max_year", { :controller => "movies", :action => "oldies" })
+  
+  get("/movies/after/:min_year", { :controller => "movies", :action => "recent" })
   
   get("/directors/youngest", { :controller => "directors", :action => "last" })
   
-  get("/directors/less_than_55", { :controller => "directors", :action => "under_55" })
+  get("/directors/younger_than/:max_age", { :controller => "directors", :action => "youngins" })
   
-  get("/directors/coppola", { :controller => "directors", :action => "francis" })
+  get("/directors/older_than/:min_age", { :controller => "directors", :action => "elders" })
   
-  get("/actors/freeman", { :controller => "actors", :action => "morgan" })
+  get("/directors/:an_id", { :controller => "directors", :action => "bio" })
+  
+  get("/actors/:the_id", { :controller => "actors", :action => "profile" })
+
+  get("/delete_movie/:toast_id", { :controller => "movies", :action => "destroy" })
+
+  get("/insert_movie", { :controller => "movies", :action => "create" })
 end
