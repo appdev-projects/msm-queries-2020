@@ -2,7 +2,7 @@
 
 ## 2020 updates
 
-Items with x's need specs.
+Items with ✓'s need specs.
 
  - [x] Two warmup routes: `/directors/youngest` and `/directors/eldest`
  - [x] Then index and show routes that match `draft:resource`.
