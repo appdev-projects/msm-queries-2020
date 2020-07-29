@@ -1,5 +1,17 @@
 # MSM QUERIES
 
+## 2020 updates
+
+Items with x's need specs.
+
+ - [x] Two warmup routes: `/directors/youngest` and `/directors/eldest`
+ - [x] Then index and show routes that match `draft:resource`.
+ - [ ] Perhaps create/destroy, I haven't decided yet.
+ - [ ] I decided against except edit/update this week.
+ - [x] The bulk of time will be on querying associations and putting e.g. the director's name on a movie, filmography on director details, characters on actor details.
+
+Thoughts?
+
 ## Objective
 
 In this project, we'll finally use our first database tables! Mostly, we'll practice using `.where` and other ActiveRecord query methods. (It would be good to have [the ActiveRecord Chapter](https://chapters.firstdraft.com/chapters/770#where) open in a tab for easy reference.) We're going to practice in the context of our familiar movie-related domain — Directors, Movies, Characters, and Actors.
