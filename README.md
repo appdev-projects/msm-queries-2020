@@ -7,8 +7,8 @@ Items with ✓'s need specs.
  - [x] Two warmup routes: `/directors/youngest` and `/directors/eldest`
  - [x] Then index and show routes that match `draft:resource`.
  - [ ] Perhaps create/destroy, I haven't decided yet.
- - [ ] I decided against except edit/update this week.
- - [x] The bulk of time will be on querying associations and putting e.g. the director's name on a movie, filmography on director details, characters on actor details.
+ - [ ] I decided against edit/update this week.
+ - [x] The bulk of time will be on querying associations and putting e.g. the director's name on a movie, filmography on director details, characters on actor details. Arguably we should do G5 first and associations second, but I feel like it's too long a gap between talking about 1-N/N-N before getting to see it happen.
 
 Thoughts?
 
