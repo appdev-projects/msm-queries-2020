@@ -8,6 +8,7 @@ class DirectorsController < ApplicationController
   def show
     the_id = params.fetch("path_id")
     @director = Director.where({:id => the_id }).at(0)
+    @filmography = Movie.where({ :director_id => @director.id })
 
     render({ :template => "director_templates/show.html.erb" })
   end

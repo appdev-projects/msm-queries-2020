@@ -109,7 +109,7 @@
     </td>
 
     <td>
-      <%= Director.where({ :id => movie.director_id }).at(0).name %>
+      <%= Director.where({ :id => movie.director_id }).at(0).try(:name) %>
     </td>
 
     <td>

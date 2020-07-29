@@ -51,6 +51,10 @@
 <table border="1">
   <tr>
     <th>
+      ID
+    </th>
+
+    <th>
       Image
     </th>
 
@@ -63,15 +67,15 @@
     </th>
 
     <th>
-      ID
-    </th>
-
-    <th>
     </th>
   </tr>
 
   <% @directors.each do |director| %>
   <tr>
+    <td>
+      <%= director.id %>
+    </td>
+
     <td>
       <img src="https://robohash.org/<%= director.name %>">
     </td>
@@ -82,10 +86,6 @@
 
     <td>
       <%= director.dob %>
-    </td>
-
-    <td>
-      <%= director.id %>
     </td>
 
     <td>
