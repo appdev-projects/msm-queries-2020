@@ -1,31 +1,35 @@
 Rails.application.routes.draw do
   get("/", { :controller => "application", :action => "homepage" })
 
-  get("/directors", { :controller => "directors", :action => "list_directors" })
+  get("/directors", { :controller => "directors", :action => "index" })
   
   get("/directors/youngest", { :controller => "directors", :action => "max_dob" })
   
   get("/directors/eldest", { :controller => "directors", :action => "min_dob" })
 
-  get("/movies", { :controller => "movies", :action => "all_movies" })
+  get("/movies", { :controller => "movies", :action => "index" })
 
-  get("/movies/:some_id", { :controller => "movies", :action => "details" })
+  get("/movies/:path_id", { :controller => "movies", :action => "show" })
   
-  get("/directors/:an_id", { :controller => "directors", :action => "bio" })
+  get("/directors/:path_id", { :controller => "directors", :action => "show" })
   
-  get("/actors", { :controller => "actors", :action => "actor_directory" })
+  get("/actors", { :controller => "actors", :action => "index" })
   
-  get("/actors/:the_id", { :controller => "actors", :action => "profile" })
+  get("/actors/:path_id", { :controller => "actors", :action => "show" })
 
-  get("/delete_movie/:toast_id", { :controller => "movies", :action => "destroy" })
+  get("/delete_movie/:path_id", { :controller => "movies", :action => "destroy" })
 
   get("/insert_movie", { :controller => "movies", :action => "create" })
 
-  get("/delete_director/:bye_id", { :controller => "directors", :action => "sayonara" })
+  get("/delete_director/:path_id", { :controller => "directors", :action => "destroy" })
 
-  get("/add_director", { :controller => "directors", :action => "welcome" })
+  get("/insert_director", { :controller => "directors", :action => "create" })
 
-  get("/delete_actor/:ciao_id", { :controller => "actors", :action => "toodles" })
+  get("/delete_actor/:path_id", { :controller => "actors", :action => "destroy" })
 
-  get("/record_actor", { :controller => "actors", :action => "hiii" })
+  get("/record_actor", { :controller => "actors", :action => "create" })
+
+  get("/modify_movie/:path_id", { :controller => "movies", :action => "update" })
+
+  get("/modify_director/:path_id", { :controller => "directors", :action => "update" })
 end

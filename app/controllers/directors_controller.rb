@@ -1,18 +1,18 @@
 class DirectorsController < ApplicationController
-  def list_directors
+  def index
     @directors = Director.all.order({ :created_at => :desc })
 
     render({ :template => "director_templates/index.html.erb" })
   end
 
-  def bio
+  def show
     the_id = params.fetch("path_id")
     @director = Director.where({:id => the_id }).at(0)
 
     render({ :template => "director_templates/show.html.erb" })
   end
 
-  def welcome
+  def create
     @director = Director.new
     @director.name = params.fetch("query_name")
     @director.dob = params.fetch("query_dob")
@@ -44,7 +44,7 @@ class DirectorsController < ApplicationController
     end
   end
 
-  def sayonara
+  def destroy
     the_id = params.fetch("path_id")
     @director = Director.where({ :id => the_id }).at(0)
 

@@ -1,23 +1,55 @@
 class ActorsController < ApplicationController
-  def morgan
-    @the_actor = Actor.where({ :name => "Morgan Freeman" }).at(0)
-    
-    # get the actor's ID number
-    morgan_id = @the_actor.id
-    
-    # go to the characters table
-    # find the rows where the actor's ID is in the actor_id column
-    the_character_rows = Character.where({ :actor_id => morgan_id })
+  def index
+    @actors = Actor.all.order({ :created_at => :desc })
 
-    # get the movie IDs from the characters
-    morgan_movie_id_array = the_character_rows.map_relation_to_array(:movie_id)
+    render({ :template => "actor_templates/index.html.erb" })
+  end
 
-    # Finally, retrieve the films
-    @the_movies = Movie.all.where({ :id => morgan_movie_id_array })
-    
-    # count them
-    @num_films = @the_movies.count
+  def show
+    the_id = params.fetch("path_id")
+    @actor = Actor.where({:id => the_id }).at(0)
 
-    render({ :template => "actor_templates/freeman.html.erb"})
+    render({ :template => "actor_templates/show.html.erb" })
+  end
+
+  def create
+    @actor = Actor.new
+    @actor.name = params.fetch("query_name")
+    @actor.dob = params.fetch("query_dob")
+    @actor.bio = params.fetch("query_bio")
+    @actor.image = params.fetch("query_image")
+
+    if @actor.valid?
+      @actor.save
+      redirect_to("/actors", { :notice => "Actor created successfully." })
+    else
+      redirect_to("/actors", { :notice => "Actor failed to create successfully." })
+    end
+  end
+
+  def update
+    the_id = params.fetch("path_id")
+    @actor = Actor.where({ :id => the_id }).at(0)
+
+    @actor.name = params.fetch("query_name")
+    @actor.dob = params.fetch("query_dob")
+    @actor.bio = params.fetch("query_bio")
+    @actor.image = params.fetch("query_image")
+
+    if @actor.valid?
+      @actor.save
+      redirect_to("/actor_templates/#{@actor.id}", { :notice => "Actor updated successfully."} )
+    else
+      redirect_to("/actor_templates/#{@actor.id}", { :alert => "Actor failed to update successfully." })
+    end
+  end
+
+  def destroy
+    the_id = params.fetch("path_id")
+    @actor = Actor.where({ :id => the_id }).at(0)
+
+    @actor.destroy
+
+    redirect_to("/actors", { :notice => "Actor deleted successfully."} )
   end
 end

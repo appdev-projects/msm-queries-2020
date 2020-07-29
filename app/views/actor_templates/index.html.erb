@@ -1,14 +1,14 @@
 <h1>
-  List of all directors
+  List of all actors
 </h1>
 
 <hr>
 
 <h2>
-  Add a new director
+  Add a new actor
 </h2>
 
-<form action="/insert_director">
+<form action="/insert_actor">
   <div>
     <label for="name_box">
       Name
@@ -42,7 +42,7 @@
   </div>
 
   <button>
-    Create director
+    Create actor
   </button>
 </form>
 
@@ -82,41 +82,40 @@
     </th>
   </tr>
 
-  <% @directors.each do |director| %>
+  <% @actors.each do |actor| %>
   <tr>
     <td>
-      <%= director.id %>
+      <%= actor.id %>
     </td>
 
     <td>
-      <%= director.name %>
+      <%= actor.name %>
     </td>
 
     <td>
-      <%= director.dob %>
+      <%= actor.dob %>
     </td>
 
     <td>
-      <%= director.bio %>
+      <%= actor.bio %>
     </td>
 
     <td>
-      <%= director.image %>
+      <%= actor.image %>
     </td>
 
     <td>
-      <%= time_ago_in_words(director.created_at) %> ago
+      <%= time_ago_in_words(actor.created_at) %> ago
     </td>
     <td>
-      <%= time_ago_in_words(director.updated_at) %> ago
+      <%= time_ago_in_words(actor.updated_at) %> ago
     </td>
 
     <td>
-      <a href="/directors/<%= director.id %>">
+      <a href="/actors/<%= actor.id %>">
         Show details
       </a>
     </td>
   </tr>
   <% end %>
 </table>
-

@@ -1,15 +1,59 @@
 class MoviesController < ApplicationController
-  def casablanca
-    @movie = Movie.where({ :title => "Casablanca"}).at(0)
+  def index
+    @movies = Movie.all.order({ :created_at => :desc })
 
-    @num_years = (Time.now.year - @movie.year)
-
-    render({ :template => "movie_templates/cb.html.erb" })
+    render({ :template => "movie_templates/index.html.erb" })
   end
-  
-  def before2k
-    @older_movies = Movie.where("year < ?", 2000).order(:year)
 
-    render({ :template => "movie_templates/pre2000.html.erb" })
+  def show
+    the_id = params.fetch("path_id")
+    @movie = Movie.where({:id => the_id }).at(0)
+
+    render({ :template => "movie_templates/show.html.erb" })
+  end
+
+  def create
+    @movie = Movie.new
+    @movie.title = params.fetch("query_title")
+    @movie.year = params.fetch("query_year")
+    @movie.duration = params.fetch("query_duration")
+    @movie.description = params.fetch("query_description")
+    @movie.image = params.fetch("query_image")
+    @movie.director_id = params.fetch("query_director_id")
+
+    if @movie.valid?
+      @movie.save
+      redirect_to("/movies", { :notice => "Movie created successfully." })
+    else
+      redirect_to("/movies", { :notice => "Movie failed to create successfully." })
+    end
+  end
+
+  def update
+    the_id = params.fetch("path_id")
+    @movie = Movie.where({ :id => the_id }).at(0)
+
+    @movie.title = params.fetch("query_title")
+    @movie.year = params.fetch("query_year")
+    @movie.duration = params.fetch("query_duration")
+    @movie.description = params.fetch("query_description")
+    @movie.image = params.fetch("query_image")
+    @movie.director_id = params.fetch("query_director_id")
+
+    if @movie.valid?
+      @movie.save
+      redirect_to("/movie_templates/#{@movie.id}", { :notice => "Movie updated successfully."} )
+    else
+      redirect_to("/movie_templates/#{@movie.id}", { :alert => "Movie failed to update successfully." })
+    end
+  end
+
+  def destroy
+    the_id = params.fetch("path_id")
+    @movie = Movie.where({ :id => the_id }).at(0)
+
+    @movie.destroy
+
+    redirect_to("/movies", { :notice => "Movie deleted successfully."} )
   end
 end
