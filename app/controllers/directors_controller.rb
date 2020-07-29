@@ -1,5 +1,59 @@
 class DirectorsController < ApplicationController
-  def last
+  def list_directors
+    @directors = Director.all.order({ :created_at => :desc })
+
+    render({ :template => "director_templates/index.html.erb" })
+  end
+
+  def bio
+    the_id = params.fetch("path_id")
+    @director = Director.where({:id => the_id }).at(0)
+
+    render({ :template => "director_templates/show.html.erb" })
+  end
+
+  def welcome
+    @director = Director.new
+    @director.name = params.fetch("query_name")
+    @director.dob = params.fetch("query_dob")
+    @director.bio = params.fetch("query_bio")
+    @director.image = params.fetch("query_image")
+
+    if @director.valid?
+      @director.save
+      redirect_to("/directors", { :notice => "Director created successfully." })
+    else
+      redirect_to("/directors", { :notice => "Director failed to create successfully." })
+    end
+  end
+
+  def update
+    the_id = params.fetch("path_id")
+    @director = Director.where({ :id => the_id }).at(0)
+
+    @director.name = params.fetch("query_name")
+    @director.dob = params.fetch("query_dob")
+    @director.bio = params.fetch("query_bio")
+    @director.image = params.fetch("query_image")
+
+    if @director.valid?
+      @director.save
+      redirect_to("/directors/#{@director.id}", { :notice => "Director updated successfully."} )
+    else
+      redirect_to("/directors/#{@director.id}", { :alert => "Director failed to update successfully." })
+    end
+  end
+
+  def sayonara
+    the_id = params.fetch("path_id")
+    @director = Director.where({ :id => the_id }).at(0)
+
+    @director.destroy
+
+    redirect_to("/directors", { :notice => "Director deleted successfully."} )
+  end
+
+  def max_dob
     @youngest = Director.
       all.
       where.not({ :dob => nil }).
@@ -9,32 +63,13 @@ class DirectorsController < ApplicationController
     render({ :template => "director_templates/youngest" })
   end
 
-  def under_55
-    fifty_five_years_ago = Time.now - 55.years
+  def min_dob
+    @eldest = Director.
+      all.
+      where.not({ :dob => nil }).
+      order({ :dob => :asc }).
+      at(0)
 
-    @young_directors = Director.
-    all.
-    where("dob > ?", fifty_five_years_ago).
-    order({ :dob => :desc })
-
-    render({ :template => "director_templates/young" })
-  end
-
-  def francis
-    # @the_director = Director.where({ :name => "Francis Ford Coppola" }).at(0)
-    
-    @the_director = Director.where("name LIKE ?", "%Francis%Coppola%").at(0)
-
-    # get the director's ID number
-    francis_id = @the_director.id
-    
-    # go to the movie table
-    # find the rows where the director's ID is in the director_id column
-    @the_movies = Movie.where({ :director_id => francis_id })
-    
-    # count them
-    @num_films = @the_movies.count
-
-    render({ :template => "director_templates/coppola.html.erb" })
+    render({ :template => "director_templates/eldest" })
   end
 end
