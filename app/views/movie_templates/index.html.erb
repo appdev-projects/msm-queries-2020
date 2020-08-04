@@ -49,7 +49,15 @@
     </td>
 
     <td>
-      <%= Director.where({ :id => movie.director_id }).at(0).try(:name) %>
+      <% matching_directors = Director.where({ :id => movie.director_id }) %>
+        
+      <% the_director = matching_directors.at(0) %>
+
+      <% if the_director != nil %>
+        <%= the_director.name %>
+      <% else %>
+        No associated director
+      <% end %>
     </td>
 
     <td>
